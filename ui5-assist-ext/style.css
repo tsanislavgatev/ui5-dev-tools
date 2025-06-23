@@ -1,0 +1,53 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f8;
+    color: #333;
+    padding: 2rem;
+  }
+  
+  div,
+  label,
+  select {
+    display: block;
+    margin-bottom: 1.2rem;
+  }
+  
+  label {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #444;
+  }
+  
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: #4f46e5; /* Tailwind's indigo-600 */
+    cursor: pointer;
+    margin-left: 0.5rem;
+  }
+  
+  select {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: white;
+    color: #333;
+    width: 200px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+  }
+  
+  div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
