@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form ENTER Behavior Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        form {
+            margin: 15px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        input, textarea, button {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            width: auto;
+            cursor: pointer;
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .log {
+            background: #1e1e1e;
+            color: #00ff00;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 20px;
+        }
+        .log-entry {
+            margin: 5px 0;
+        }
+        .clear-btn {
+            background: #dc3545;
+            margin-top: 10px;
+        }
+        .clear-btn:hover {
+            background: #c82333;
+        }
+        .description {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Form ENTER Key Behavior Test</h1>
+    <p>Try pressing ENTER while focused on different input fields to see when forms submit.</p>
+
+    <div class="test-section">
+        <h2>Test 1: Multiple inputs WITH submit button</h2>
+        <p class="description">Press ENTER in any text input</p>
+        <form id="form1">
+            <input type="text" name="field1" placeholder="First name">
+            <input type="text" name="field2" placeholder="Last name">
+            <input type="email" name="email" placeholder="Email">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 2: Multiple inputs WITHOUT submit button</h2>
+        <p class="description">Press ENTER in any text input</p>
+        <form id="form2">
+            <input type="text" name="field1" placeholder="First name">
+            <input type="text" name="field2" placeholder="Last name">
+            <input type="email" name="email" placeholder="Email">
+        </form>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 3: Multiple inputs with regular button (type="button")</h2>
+        <p class="description">Press ENTER in any text input</p>
+        <form id="form3">
+            <input type="text" name="field1" placeholder="First name">
+            <input type="text" name="field2" placeholder="Last name">
+            <button type="button" onclick="log('Regular button clicked (form3)')">Click me</button>
+        </form>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 4: Single input WITH submit button</h2>
+        <p class="description">Press ENTER in the input</p>
+        <form id="form4">
+            <input type="text" name="search" placeholder="Search">
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 5: Single input WITHOUT submit button</h2>
+        <p class="description">Press ENTER in the input</p>
+        <form id="form5">
+            <input type="text" name="search" placeholder="Search">
+        </form>
+    </div>
+
+    <div class="test-section">
+        <h2>Test 6: Textarea behavior</h2>
+        <p class="description">Press ENTER in the textarea</p>
+        <form id="form6">
+            <textarea name="message" placeholder="Type here and press ENTER"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="log" id="log">
+        <div class="log-entry">Event log will appear here...</div>
+    </div>
+    <button class="clear-btn" onclick="clearLog()">Clear Log</button>
+
+    <script>
+        const logEl = document.getElementById('log');
+        
+        function log(message) {
+            const time = new Date().toLocaleTimeString();
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.textContent = `[${time}] ${message}`;
+            logEl.appendChild(entry);
+            logEl.scrollTop = logEl.scrollHeight;
+        }
+
+        function clearLog() {
+            logEl.innerHTML = '<div class="log-entry">Log cleared...</div>';
+        }
+
+        // Add submit listeners to all forms
+        document.querySelectorAll('form').forEach((form, index) => {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                log(`✓ FORM SUBMITTED: ${form.id}`);
+            });
+        });
+
+        // Add keydown listeners to track ENTER presses
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const formId = e.target.closest('form')?.id || 'no form';
+                    const fieldType = e.target.tagName.toLowerCase();
+                    log(`ENTER pressed in ${fieldType} (${formId})`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
