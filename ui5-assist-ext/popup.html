@@ -1,25 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <style>
-    body { font-family: sans-serif; padding: 10px; display: flex; flex-direction: column; gap: 10px; width: 200px; height: 100px;}
-  </style>
-  <style src="style.css"></style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI5 Dev Tools</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div>
-      <label>
-        Compact Mode
-      </label>
-      <input type="checkbox" id="toggleSwitch" />
+  <div class="container">
+    <h1 class="title">UI5 Dev Tools</h1>
+    
+    <div class="control-group">
+      <div class="toggle-control">
+        <label for="toggleSwitch" class="toggle-label">
+          <span class="label-text">Compact Mode</span>
+          <div class="toggle-switch">
+            <input type="checkbox" id="toggleSwitch" class="toggle-input" />
+            <span class="toggle-slider"></span>
+          </div>
+        </label>
+      </div>
     </div>
-    <label>
-      Text Direction:
-    </label>
-    <select id="directionSelect">
-      <option value="ltr">LTR</option>
-      <option value="rtl">RTL</option>
-    </select>
+
+    <div class="control-group">
+      <label for="directionSelect" class="select-label">Text Direction</label>
+      <select id="directionSelect" class="select-input">
+        <option value="ltr">Left to Right (LTR)</option>
+        <option value="rtl">Right to Left (RTL)</option>
+      </select>
+    </div>
+
+    <div class="control-group">
+      <label for="themeSelect" class="select-label">UI5 Theme</label>
+      <select id="themeSelect" class="select-input">
+        <option value="sap_horizon">SAP Horizon</option>
+        <option value="sap_horizon_dark">SAP Horizon Dark</option>
+        <option value="sap_fiori_3">SAP Fiori 3</option>
+        <option value="sap_fiori_3_dark">SAP Fiori 3 Dark</option>
+        <option value="sap_horizon_hcw">SAP Horizon High Contrast White</option>
+        <option value="sap_horizon_hcb">SAP Horizon High Contrast Black</option>
+      </select>
+    </div>
+  </div>
+  
   <script src="popup.js"></script>
 </body>
 </html>
